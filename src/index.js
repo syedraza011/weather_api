@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { createTheme } from '@mui/material/styles';
 import {
-    ActivityIndicator,
+  ActivityIndicator,
   Alert,
   RefreshControl,
   SafeAreaView,
   ScrollView,
   Text,
   View,
+  styleSheet,
 } from "react-native";
 import * as location from "expo-location";
 const openWeatherKey = "1f33270dda9129a9ff6da0dc07457f83";
@@ -36,11 +38,11 @@ const Weather = () => {
     if (!forecast) {
       return (
         <SafeAreaView style={StyleSheet.loading}>
-          <ActivityIndicator size='large'/>
+          <ActivityIndicator size="large" />
         </SafeAreaView>
       );
     }
-    const current=forecast.current.weather
+    const current = forecast.current.weather[0]; //getting the current weather
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -53,10 +55,19 @@ const Weather = () => {
         }
         style={{ marginTop: 50 }}
       >
-        <Text></Text>
+        <Text style={styles.title}>Current Weather</Text>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
 export default Weather;
+
+const styles = styleSheet.create({
+  title: {
+    textAlign: "center",
+    fontsize: 36,
+    fontweight: "bold",
+    color: "#c84b31",
+  },
+});
